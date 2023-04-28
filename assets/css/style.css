@@ -41,6 +41,7 @@
   --bs-orange: #fd7e14;
   --bs-mode: #fff;
   --bs-primary-rgb: 81, 67, 217;
+  --bs-sn-rgb: 223, 12, 44;
   --bs-white-rgb: 255, 255, 255;
   --bs-secondary-rgb: 133, 135, 138;
   --bs-success-rgb: 12, 188, 135;
@@ -21347,7 +21348,7 @@ html[dir=rtl] .choices__input {
   height: 3rem;
   border-radius: 100%;
   background-color: rgba(var(--bs-primary-rgb), 0.1);
-  border: 2px solid rgba(var(--bs-primary-rgb), 0.4);
+  border: 2px solid rgba(var(--bs-sn-rgb), 0.4);
   color: var(--bs-primary);
   line-height: 1.9rem;
 }
@@ -21358,7 +21359,7 @@ html[dir=rtl] .choices__input {
   padding: 20px;
 }
 .stepper-outline .step.active .bs-stepper-circle {
-  background-color: var(--bs-primary);
+  background-color: #051446;
   color: #fff;
   border: none;
   line-height: 2rem;
@@ -21367,7 +21368,7 @@ html[dir=rtl] .choices__input {
   margin: 0;
 }
 .stepper-outline .step.active .bs-stepper-label {
-  color: var(--bs-primary);
+  color: #DF0C2C;
 }
 
 .step-trigger {

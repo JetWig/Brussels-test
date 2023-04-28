@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Booking - Multipurpose Online Booking Theme</title>
+
+	<!-- Meta Tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="Webestica.com">
+	<meta name="description" content="Booking - Multipurpose Online Booking Theme">
+
+	<!-- Dark mode -->
+	<script>
+		const storedTheme = localStorage.getItem('theme')
+ 
+		const getPreferredTheme = () => {
+			if (storedTheme) {
+				return storedTheme
+			}
+			return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+		}
+
+		const setTheme = function (theme) {
+			if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-bs-theme', 'dark')
+			} else {
+				document.documentElement.setAttribute('data-bs-theme', theme)
+			}
+		}
+
+		setTheme(getPreferredTheme())
+
+		window.addEventListener('DOMContentLoaded', () => {
+		    var el = document.querySelector('.theme-icon-active');
+			if(el != 'undefined' && el != null) {
+				const showActiveTheme = theme => {
+				const activeThemeIcon = document.querySelector('.theme-icon-active use')
+				const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+				const svgOfActiveBtn = btnToActive.querySelector('.mode-switch use').getAttribute('href')
+
+				document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+					element.classList.remove('active')
+				})
+
+				btnToActive.classList.add('active')
+				activeThemeIcon.setAttribute('href', svgOfActiveBtn)
+			}
+
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+				if (storedTheme !== 'light' || storedTheme !== 'dark') {
+					setTheme(getPreferredTheme())
+				}
+			})
+
+			showActiveTheme(getPreferredTheme())
+
+			document.querySelectorAll('[data-bs-theme-value]')
+				.forEach(toggle => {
+					toggle.addEventListener('click', () => {
+						const theme = toggle.getAttribute('data-bs-theme-value')
+						localStorage.setItem('theme', theme)
+						setTheme(theme)
+						showActiveTheme(theme)
+					})
+				})
+
+			}
+		})
+		
+	</script>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="assets/images/favicon.ico">
+
+	<!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap">
+
+	<!-- Plugins CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/font-awesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap-icons/bootstrap-icons.css">
+	<link rel="stylesheet" type="text/css" href="assets/vendor/choices/css/choices.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/vendor/flatpickr/css/flatpickr.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/vendor/stepper/css/bs-stepper.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/vendor/quill/css/quill.snow.css">
+	<link rel="stylesheet" type="text/css" href="assets/vendor/dropzone/css/dropzone.css">
+
+	<!-- Theme CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+</head>
+
+<body>
+
+<!-- Header START -->
+<header class="navbar-light header-sticky">
+	<!-- Logo Nav START -->
+	<nav class="navbar navbar-expand-lg">
+		<div class="container d-block">
+			<div class="row align-items-center">
+				<div class="col-4">
+					
+					<a class="navbar-brand" href="index.html">
+						<img class="light-mode-item navbar-brand-item d-md-inline h-md-70px" src="https://media.discordapp.net/attachments/970715142616657920/1101240815726116894/snva-blue-head.png?width=2072&height=1036" alt="logo">
+						<img class="dark-mode-item navbar-brand-item d-md-inline h-md-70px" src="https://media.discordapp.net/attachments/970715142616657920/1101240035036110968/snva-white-head.png?width=2072&height=1036" alt="logo">
+					</a>
+					
+				</div>
+
+				<div class="col-8">
+					<!-- Navbar top Right-->
+					<div class="align-items-center justify-content-end d-none d-lg-flex">
+						<ul class="nav border-bottom">
+							<li class="dropdown nav-item">
+								<a class="nav-link small pb-2" href="#" role="button" id="languageDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-globe fa-fw me-2"></i>Language</a>
+								<ul class="dropdown-menu dropdown-animation dropdown-menu-end min-w-auto" aria-labelledby="languageDropdown">
+									<li> <a class="dropdown-item me-4" href="index.html"><img class="fa-fw me-2" src="assets/images/flags/uk.svg" alt="">English</a> </li>
+									<li> <a class="dropdown-item me-4" href="error.html"><img class="fa-fw me-2" src="assets/images/flags/fr.svg" alt="">Français</a> </li>
+								</ul>
+							</li>
+							<li class="nav-item"> <a href="error.html" class="nav-link small pb-2"><i class="bi bi-info-circle me-2"></i>Help</a> </li>
+							<li class="nav-item"> <a href="about.html" class="nav-link small pb-2"><i class="far fa-user me-2"></i>Login</a> </li>
+							<!-- Dark mode option START -->
+							<li class="nav-item dropdown">
+								<button class="btn btn-link text-warning lh-3 p-0 mb-0" id="bd-theme"
+								type="button"
+								aria-expanded="false"
+								data-bs-toggle="dropdown"
+								data-bs-display="static">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle-half theme-icon-active fa-fw" viewBox="0 0 16 16">
+									<path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+									<use href="#"></use>
+								</svg>
+								</button>
+			
+								<ul class="dropdown-menu min-w-auto dropdown-menu-end" aria-labelledby="bd-theme">
+									<li class="mb-1">
+										<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
+											<svg width="16" height="16" fill="currentColor" class="bi bi-brightness-high-fill fa-fw mode-switch me-1" viewBox="0 0 16 16">
+												<path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+												<use href="#"></use>
+											</svg>Light
+										</button>
+									</li>
+									<li class="mb-1">
+										<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon-stars-fill fa-fw mode-switch me-1" viewBox="0 0 16 16">
+												<path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+												<path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+												<use href="#"></use>
+											</svg>Dark
+										</button>
+									</li>
+									<li>
+										<button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-half fa-fw mode-switch me-1" viewBox="0 0 16 16">
+												<path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+												<use href="#"></use>
+											</svg>Auto
+										</button>
+									</li>
+								</ul>
+							</li>
+							<!-- Dark mode option END -->
+						</ul>
+					</div>	
+
+					<div class="d-sm-flex align-items-center justify-content-end">
+						<!-- Main navbar START -->
+						<div class="navbar-collapse collapse" id="navbarCollapse">
+							<ul class="navbar-nav navbar-nav-scroll ms-auto">
+
+										
+								<!-- Nav item Facilities -->
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="pagesFacilities" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About Us</a>
+									<ul class="dropdown-menu" aria-labelledby="pagesFacilities">
+	
+										<li> <a class="dropdown-item" href="team.html">Our Staff Team</a></li>
+										<li> <a class="dropdown-item" href="ranks.html">Our Ranks</a></li>
+										<li> <a class="dropdown-item" href="error.html">Star Alliance</a></li>
+										<li> <a class="dropdown-item" href="error.html">Our Codeshares</a></li>
+									</ul>
+								</li>
+							
+								<!-- Nav item Facilities -->
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="pagesFacilities" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Operations</a>
+									<ul class="dropdown-menu" aria-labelledby="pagesFacilities">
+	
+										<li> <a class="dropdown-item" href="error.html">Our Fleet</a></li>
+										<li> <a class="dropdown-item" href="error.html">Our Destinations</a></li>
+										<li> <a class="dropdown-item" href="error.html">Our Hubs</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<!-- Main navbar END -->
+
+						<!-- Toggler button and stay button -->
+						<div class="d-flex align-items-center justify-content-end">
+							<!-- Responsive navbar toggler -->
+							<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-animation">
+									<span></span>
+									<span></span>
+									<span></span>
+								</span>
+								<span class="d-none d-sm-inline-block small">Menu</span>
+							</button>
+		
+							<!-- Booking form dropdown START -->
+							<div class="nav-item dropdown form-control-bg-light">
+								<!-- Stay button -->
+								<a class="btn btn-sm btn-primary mb-0" href="error.html" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+									Apply
+								</a>
+							</div>
+							<!-- Booking form dropdown END -->
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<!-- Logo Nav END -->
+</header>
+<!-- Header END -->
+
+<!-- **************** MAIN CONTENT START **************** -->
+<main>
+	
+<!-- =======================
+Page Banner START -->
+<section class="pb-0">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h1 class="fs-2 mb-2">Apply Now</h1>
+				<p class="mb-0">Get a look below at the steps & requirements before applying.</p>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- =======================
+Page Banner END -->
+
+<!-- =======================
+Steps START -->
+<section>
+	<div class="container">
+		<div id="stepper" class="bs-stepper stepper-outline">
+			<!-- Step Buttons START -->
+			<div class="bs-stepper-header" role="tablist">
+				<!-- Step 1 -->
+				<div class="step" data-target="#step-1">
+					<div class="text-center">
+						<button type="button" class="btn btn-link step-trigger mb-0" role="tab" id="steppertrigger1" aria-controls="step-1">
+							<span class="bs-stepper-circle">1</span>
+						</button>
+						<h6 class="bs-stepper-label d-none d-md-block">Entry Requirements</h6>
+					</div>
+				</div>
+				<div class="line"></div>
+
+				<!-- Step 2 -->
+				<div class="step" data-target="#step-2">
+					<div class="text-center">
+						<button type="button" class="btn btn-link step-trigger mb-0" role="tab" id="steppertrigger2" aria-controls="step-2">
+							<span class="bs-stepper-circle">2</span>
+						</button>
+						<h6 class="bs-stepper-label d-none d-md-block">Take Entrance Exam</h6>
+					</div>
+				</div>
+				<div class="line"></div>
+
+				<!-- Step 3 -->
+				<div class="step" data-target="#step-3">
+					<div class="text-center">
+						<button type="button" class="btn btn-link step-trigger mb-0" role="tab" id="steppertrigger3" aria-controls="step-3">
+							<span class="bs-stepper-circle">3</span>
+						</button>
+						<h6 class="bs-stepper-label d-none d-md-block">Join our Discord</h6>
+					</div>
+				</div>
+			</div>
+			<!-- Step Buttons END -->
+
+			<!-- Step content START -->
+			<div class="bs-stepper-content p-0 pt-4 pt-md-5">
+				<div class="row g-4">
+
+					<!-- Main content START -->
+					<div class="col-12">
+						<form onsubmit="return false">
+
+							<!-- Step 1 content START -->
+							<div id="step-1" role="tabpanel" class="content fade" aria-labelledby="steppertrigger1">
+								<div class="vstack gap-4">
+									<!-- Title -->
+									<h4 class="mb-0">Entry Requirements</h4>
+
+									<!-- Listing category START -->
+									<div class="card shadow">
+										<!-- Card header -->
+										<div class="card-header border-bottom">
+											<!-- Title -->
+											<h5 class="mb-0"></h5>
+										</div>
+			
+										<!-- Card body START -->
+										<div class="card-body">
+											<div class="row g-4">
+												<!-- Choose type -->
+												<div class="col-12">
+													<ul class="list-group list-group-borderless mb-0">
+                                                        <li class="list-group-item d-flex pb-0 mb-0">
+                                                            <span class="h6 fw-normal mb-0"><i class="fa-solid fa-circle-dot me-2"></i> Be at least 13 years of age.</span>
+                                                        </li>
+                                                        <li class="list-group-item d-flex pb-0 mb-0">
+                                                            <span class="h6 fw-normal mb-0"><i class="fa-solid fa-circle-dot me-2"></i> Be Grade 3 or above</span>
+                                                        </li>
+                                                        <li class="list-group-item d-flex pb-0 mb-0">
+                                                            <span class="h6 fw-normal mb-0"><i class="fa-solid fa-circle-dot me-2"></i> Own a legal copy of Infinite Flight.</span>
+                                                        </li>
+                                                        <li class="list-group-item d-flex pb-0 mb-0">
+                                                            <span class="h6 fw-normal mb-0"><i class="fa-solid fa-circle-dot me-2"></i> Be able to speak basic English.</span>
+                                                        </li>
+                                                        <li class="list-group-item d-flex pb-0 mb-0">
+                                                            <span class="h6 fw-normal mb-0"><i class="fa-solid fa-circle-dot me-2"></i> Be able to use Discord.</span>
+                                                        </li>
+                                                        <li class="list-group-item d-flex pb-0 mb-0">
+                                                            <span class="h6 fw-normal mb-0"><i class="fa-solid fa-circle-dot me-2"></i> Have an IFC account in good standing.</span>
+                                                        </li>
+                                                        <li class="list-group-item d-flex pb-0 mb-0">
+                                                            <span class="h6 fw-normal mb-0"><i class="fa-solid fa-circle-dot me-2"></i> Do not appear on the IFVARB blacklist.</span>
+                                                        </li>
+                                                        <li class="list-group-item d-flex pb-0 mb-0">
+                                                            <span class="h6 fw-normal mb-0"><i class="fa-solid fa-circle-dot me-2"></i> Be able to complete at least one flight per month.</span>
+                                                        </li>
+                                                    </ul> 
+												</div>
+											</div>
+										</div>
+										<!-- Card body END -->
+									</div>
+									<!-- Listing category END -->
+	
+
+									<!-- Step 1 button -->
+									<div class="text-end">
+										<button class="btn btn-primary next-btn mb-0">Next</button>
+									</div>
+								</div>
+							</div>
+							<!-- Step 1 content END -->
+
+							<!-- Step 2 content START -->
+							<div id="step-2" role="tabpanel" class="content fade" aria-labelledby="steppertrigger2">
+								<div class="vstack gap-4">
+									<!-- Title -->
+									<h4 class="mb-0">Entrance Exam</h4>
+
+									<!-- Overview START -->
+									<div class="card shadow">
+                    
+                                        <!-- Card body -->
+                                        <div class="card-body text-center p-4">
+                                            <!-- Title -->
+                                            <h1 class="card-title fs-3">🍀 Good luck! 🍀</h1>
+                    
+                                            <!-- List -->
+                                            <div class="row justify-content-between text-start mb-4">
+                                                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf8QUpKxx0-A314tvcbhVFUWV4CPcW8kulTQ3EqjpQIzc6QrQ/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                                            </div>
+                    
+                                        </div>
+                                    </div>	
+									<!-- Overview END -->
+
+									<!-- Step 2 button -->
+									<div class="hstack gap-2 flex-wrap justify-content-between">
+										<button class="btn btn-primary next-btn mb-0">Next</button>
+									</div>
+								</div>	
+							</div>
+							<!-- Step 2 content END -->
+
+							<!-- Step 3 content START -->
+							<div id="step-3" role="tabpanel" class="content fade" aria-labelledby="steppertrigger3">
+								<div class="vstack gap-4">
+									<!-- Title -->
+									<h4 class="mb-0">Join our Discord</h4>
+
+									<!-- Listing price START -->
+									<div class="card shadow">
+										<!-- Card header -->
+										<div class="card-header border-bottom">
+											<h5 class="mb-0">Discord Invitation</h5>
+										</div>
+			
+										<!-- Card body START -->
+										<div class="card-body">
+											<div class="row g-4">
+												<!-- Currency -->
+                                                <center>
+												<div class="col-md-12">
+													<a class="badge text-bg-primary"><i class="fa-brands fa-discord me-2"></i>Discord Invitation Given By Staff</a>
+												</div>
+                                                </center>
+											</div>
+										</div>
+										<!-- Card body END -->
+									</div>
+									<!-- Listing price END -->
+
+								</div>
+							</div>
+							<!-- Step 3 content END -->
+
+						</form>
+					</div>
+					<!-- Main content END -->
+
+				</div>						
+			</div>
+			<!-- Step content END -->
+		</div>
+	</div>
+</section>
+<!-- =======================
+Steps END -->
+
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
+
+<!-- =======================
+Footer START -->
+<footer class="bg-dark pt-5">
+	<div class="container">
+		<!-- Row START -->
+		<div class="row g-4">
+
+			<!-- Widget 1 START -->
+			<div class="col-lg-3">
+				<!-- logo -->
+				<a href="index.html">
+					<img class="h-50px" src="https://media.discordapp.net/attachments/970715142616657920/1101240035036110968/snva-white-head.png?width=2072&height=1036" alt="logo">
+				</a>
+				<br>
+				<br>
+				<p class="mb-0"><a href="#" style="font-weight: 700;" class="text-muted text-primary-hover"><i class="bi bi-envelope me-2"></i>contact@brusselsvirtual.be</a></p>
+			</div>
+			<!-- Widget 1 END -->
+
+			<!-- Widget 2 START -->
+			<div class="col-lg-8 ms-auto">
+				<div class="row g-4">
+					<!-- Link block -->
+					<div class="col-6 col-md-3">
+						<h5 class="text-white mb-2 mb-md-2">Pages</h5>
+						<ul class="nav flex-column text-primary-hover">
+							<li class="nav-item"><a style="font-weight: 700;" class="nav-link text-muted" href="#">About us</a></li>
+							<li class="nav-item"><a style="font-weight: 700;" class="nav-link text-muted" href="#">Our Fleet</a></li>
+							<li class="nav-item"><a style="font-weight: 700;" class="nav-link text-muted" href="#">Our Ranks</a></li>
+							<li class="nav-item"><a style="font-weight: 700;" class="nav-link text-muted" href="#">Our Team</a></li>
+						</ul>
+					</div>
+
+					<!-- Link block -->
+					<div class="col-6 col-md-3">
+						<h5 class="text-white mb-2 mb-md-2">IFC</h5>
+						<ul class="nav flex-column text-primary-hover">
+							<li class="nav-item"><a  style="font-weight: 700;" class="nav-link text-muted" href="#">IFC Account</a></li>
+							<li class="nav-item"><a  style="font-weight: 700;" class="nav-link text-muted" href="#">IFC Thead</a></li>
+							<li class="nav-item"><a  style="font-weight: 700;" class="nav-link text-muted" href="#">IFVARB Website</a></li>
+						</ul>
+					</div>
+									
+					<!-- Link block -->
+					<div class="col-6 col-md-3">
+						<h5 class="text-white mb-2 mb-md-2">Crew Center</h5>
+						<ul class="nav flex-column text-primary-hover">
+							<li class="nav-item"><a  style="font-weight: 700;" class="nav-link text-muted" href="#">Login</a></li>
+							<li class="nav-item"><a  style="font-weight: 700;" class="nav-link text-muted" href="#">VACenter Website</a></li>
+						</ul>
+					</div>
+
+					
+				</div>
+			</div>
+			<!-- Widget 2 END -->
+
+		</div><!-- Row END -->
+
+
+		<hr>
+	
+		<!-- Bottom footer -->
+		<div class="row">
+			<div class="container">
+				<div class="d-lg-flex justify-content-between align-items-center py-3 text-center text-lg-start">
+					<!-- copyright text -->
+					<div class="text-muted text-primary-hover"> © 2023 Brussels Virtual. All rights reserved. <br> Brussels Virtual is in no way related to the real Brussels Airlines S.A. / N.V. or Infinite Flight.
+					</div>
+					<!-- copyright links-->
+					<div class="nav mt-2 mt-lg-0">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- =======================
+Footer END -->
+
+<!-- Back to top -->
+<div class="back-top"></div>
+
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Vendors -->
+<script src="assets/vendor/choices/js/choices.min.js"></script>
+<script src="assets/vendor/flatpickr/js/flatpickr.min.js"></script>
+<script src="assets/vendor/stepper/js/bs-stepper.min.js"></script>
+<script src="assets/vendor/quill/js/quill.min.js"></script>
+<script src="assets/vendor/dropzone/js/dropzone.js"></script>
+
+<!-- ThemeFunctions -->
+<script src="assets/js/functions.js"></script>
+
+</body>
+</html>
