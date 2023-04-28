@@ -16347,6 +16347,10 @@ textarea.form-control-lg {
   fill: #fd7e14 !important;
 }
 
+.fill-sn {
+  fill: #E4002B !important;
+}
+
 .fill-mode {
   fill: var(--bs-mode) !important;
 }
