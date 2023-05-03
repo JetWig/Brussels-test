@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Brussels Virtual | Nos Hubs</title>
+
+	<!-- EMBED -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta content="" name="description">
+	<meta name="theme-color" content="#051446">
+	<meta property="og:site_name" content="Brussels Virtual">
+	<meta property="og:type" content="website">
+	<link rel="canonical" href="https://brusselsvirtual.be/">
+	<meta name="robots" content="index,follow">
+	<meta name="next-head-count" content="18">
+
+	<!-- Dark mode -->
+	<script>
+		const storedTheme = localStorage.getItem('theme')
+ 
+		const getPreferredTheme = () => {
+			if (storedTheme) {
+				return storedTheme
+			}
+			return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+		}
+
+		const setTheme = function (theme) {
+			if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-bs-theme', 'dark')
+			} else {
+				document.documentElement.setAttribute('data-bs-theme', theme)
+			}
+		}
+
+		setTheme(getPreferredTheme())
+
+		window.addEventListener('DOMContentLoaded', () => {
+		    var el = document.querySelector('.theme-icon-active');
+			if(el != 'undefined' && el != null) {
+				const showActiveTheme = theme => {
+				const activeThemeIcon = document.querySelector('.theme-icon-active use')
+				const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+				const svgOfActiveBtn = btnToActive.querySelector('.mode-switch use').getAttribute('href')
+
+				document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+					element.classList.remove('active')
+				})
+
+				btnToActive.classList.add('active')
+				activeThemeIcon.setAttribute('href', svgOfActiveBtn)
+			}
+
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+				if (storedTheme !== 'light' || storedTheme !== 'dark') {
+					setTheme(getPreferredTheme())
+				}
+			})
+
+			showActiveTheme(getPreferredTheme())
+
+			document.querySelectorAll('[data-bs-theme-value]')
+				.forEach(toggle => {
+					toggle.addEventListener('click', () => {
+						const theme = toggle.getAttribute('data-bs-theme-value')
+						localStorage.setItem('theme', theme)
+						setTheme(theme)
+						showActiveTheme(theme)
+					})
+				})
+
+			}
+		})
+		
+	</script>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="https://media.discordapp.net/attachments/1101242530168844319/1101264543436521584/snva_future_final.png">
+
+	<!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap">
+
+	<!-- Plugins CSS -->
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/font-awesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/bootstrap-icons/bootstrap-icons.css">
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/choices/css/choices.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/flatpickr/css/flatpickr.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/stepper/css/bs-stepper.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/quill/css/quill.snow.css">
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/dropzone/css/dropzone.css">
+
+	<!-- Theme CSS -->
+	<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+
+</head>
+
+<body>
+
+<!-- Header START -->
+<header class="navbar-light header-sticky">
+	<!-- Logo Nav START -->
+	<nav class="navbar navbar-expand-lg">
+		<div class="container d-block">
+			<div class="row align-items-center">
+				<div class="col-4">
+					
+					<a class="navbar-brand" href="../fr/index.html">
+						<img class="light-mode-item navbar-brand-item d-md-inline h-md-70px" src="https://media.discordapp.net/attachments/970715142616657920/1101240815726116894/snva-blue-head.png?width=2072&height=1036" alt="logo">
+						<img class="dark-mode-item navbar-brand-item d-md-inline h-md-70px" src="https://media.discordapp.net/attachments/970715142616657920/1101240035036110968/snva-white-head.png?width=2072&height=1036" alt="logo">
+					</a>
+					
+				</div>
+
+				<div class="col-8">
+					<!-- Navbar top Right-->
+					<div class="align-items-center justify-content-end d-none d-lg-flex">
+						<ul class="nav border-bottom">
+							<li class="dropdown nav-item">
+								<a class="nav-link small pb-2" href="#" role="button" id="languageDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-globe fa-fw me-2"></i>Langues</a>
+								<ul class="dropdown-menu dropdown-animation dropdown-menu-end min-w-auto" aria-labelledby="languageDropdown">
+									<li> <a class="dropdown-item me-4" href="../hubs.html"><img class="fa-fw me-2" src="../assets/images/flags/uk.svg" alt="">English</a> </li>
+									<li> <a class="dropdown-item me-4" href="../fr/hubs.html"><img class="fa-fw me-2" src="../assets/images/flags/fr.svg" alt="">Français</a> </li>
+								</ul>
+							</li>
+							<li class="nav-item"> <a href="../fr/error.html" class="nav-link small pb-2"><i class="bi bi-info-circle me-2"></i>Aide</a> </li>
+							<li class="nav-item"> <a href="https://atlas.va-center.com" class="nav-link small pb-2"><i class="far fa-user me-2"></i>Connexion</a> </li>
+							<!-- Dark mode option START -->
+							<li class="nav-item dropdown">
+								<button class="btn btn-link text-warning lh-3 p-0 mb-0" id="bd-theme"
+								type="button"
+								aria-expanded="false"
+								data-bs-toggle="dropdown"
+								data-bs-display="static">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle-half theme-icon-active fa-fw" viewBox="0 0 16 16">
+									<path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+									<use href="#"></use>
+								</svg>
+								</button>
+			
+								<ul class="dropdown-menu min-w-auto dropdown-menu-end" aria-labelledby="bd-theme">
+									<li class="mb-1">
+										<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
+											<svg width="16" height="16" fill="currentColor" class="bi bi-brightness-high-fill fa-fw mode-switch me-1" viewBox="0 0 16 16">
+												<path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+												<use href="#"></use>
+											</svg>Clair
+										</button>
+									</li>
+									<li class="mb-1">
+										<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon-stars-fill fa-fw mode-switch me-1" viewBox="0 0 16 16">
+												<path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+												<path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+												<use href="#"></use>
+											</svg>Sombre
+										</button>
+									</li>
+									<li>
+										<button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-half fa-fw mode-switch me-1" viewBox="0 0 16 16">
+												<path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+												<use href="#"></use>
+											</svg>Auto
+										</button>
+									</li>
+								</ul>
+							</li>
+							<!-- Dark mode option END -->
+						</ul>
+					</div>	
+
+					<div class="d-sm-flex align-items-center justify-content-end">
+						<!-- Main navbar START -->
+						<div class="navbar-collapse collapse" id="navbarCollapse">
+							<ul class="navbar-nav navbar-nav-scroll ms-auto">
+
+										
+								<!-- Nav item Facilities -->
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="pagesFacilities" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">À propos de nous</a>
+									<ul class="dropdown-menu" aria-labelledby="pagesFacilities">
+	
+										<li> <a class="dropdown-item" href="../fr/team.html">Notre Equipe du Personnel</a></li>
+										<li> <a class="dropdown-item" href="../fr/ranks.html">Nos Rangs</a></li>
+										<li> <a class="dropdown-item" href="../fr/star-alliance.html">Star Alliance</a></li>
+										<li> <a class="dropdown-item" href="../fr/codeshares.html">Nos Codeshares</a></li>
+									</ul>
+								</li>
+							
+								<!-- Nav item Facilities -->
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="pagesFacilities" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opérations</a>
+									<ul class="dropdown-menu" aria-labelledby="pagesFacilities">
+	
+										<li> <a class="dropdown-item" href="../fr/fleet.html">Notre Flotte</a></li>
+										<li> <a class="dropdown-item" href="../fr/destinations.html">Nos Destinations</a></li>
+										<li> <a class="dropdown-item" href="../fr/hubs.html">Nos Hubs</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<!-- Main navbar END -->
+
+						<!-- Toggler button and stay button -->
+						<div class="d-flex align-items-center justify-content-end">
+							<!-- Responsive navbar toggler -->
+							<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-animation">
+									<span></span>
+									<span></span>
+									<span></span>
+								</span>
+								<span class="d-none d-sm-inline-block small">Menu</span>
+							</button>
+		
+							<!-- Booking form dropdown START -->
+							<div class="nav-item dropdown form-control-bg-light">
+								<!-- Stay button -->
+								<a class="btn btn-sm btn-primary mb-0" href="../fr/apply.html" role="button" aria-expanded="false" data-bs-auto-close="outside">
+									Postuler
+								</a>
+							</div>
+							<!-- Booking form dropdown END -->
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<!-- Logo Nav END -->
+</header>
+<!-- Header END -->
+<!-- **************** MAIN CONTENT START **************** -->
+<main>
+    
+    <!-- =======================
+    About START -->
+    <section>
+        <div class="container">
+            <div class="row g-4">
+                
+                <div class="col-lg-4 position-relative">
+                    <h2>Aéroport de Bruxelles</h2>
+                    <p>L'aéroport de Bruxelles, également connu sous le nom d'aéroport de Bruxelles-Zaventem, est le principal aéroport international de Belgique.</p>
+                    <img src="https://media.discordapp.net/attachments/970715142616657920/1101574779649151007/EBBR2.png?width=1064&height=676" class="rounded-3" alt="">
+                    <!-- Svg decoration -->
+                    
+                </div>
+    
+                <div class="col-lg-7 position-relative ms-auto">
+                    <!-- Svg decoration -->
+                    <figure class="position-absolute top-0 start-0 translate-middle mt-8 ms-n4 z-index-9 d-none d-xl-block">
+                        <svg class="fill-sn" width="153.6px" height="71.4px" viewBox="0 0 153.6 71.4" style="enable-background:new 0 0 153.6 71.4;" xml:space="preserve">
+                            <path d="M14.4,0.8c-2.3,0.4-4.6,0.9-6.8,1.5C6.7,2.6,5.8,2.8,4.9,3.1S3,3.7,2.3,4.2c-0.6,0.3-1.1,1-1.5,1.4C0.3,6.2,0,6.9,0,7.6 c0,0.1,0,0.2,0.1,0.3C0.2,8.1,0.6,8,0.8,7.9c0.7-0.4,1.4-0.7,2.1-1.1c0.5-0.3,1-0.6,1.6-0.7c1.1-0.2,2.1-0.6,3.1-0.9 c3.4-1,7-1.4,10.5-1.7c6.5-0.6,12.9,0,19.2,1.4c2.7,0.6,5.5,1.3,8.2,1.9c2.2,0.6,4.5,1.1,6.7,1.8c1.1,0.3,2.2,0.6,3.4,1 c1,0.3,2.2,0.6,3.2,1c0.3,0.2,0.6,0.4,0.9,0.6c0.5,0.2,1,0.3,1.4,0.5c1,0.3,1.9,0.7,2.8,1.2c1.8,0.9,3.5,2,5.1,3.3 c1.5,1.2,3,2.5,4.4,3.8c0.6,0.6,1.4,1.4,2,2.1c0.1,0.1,0.4,0.3,0.3,0.5c0,0.2-1,0.2-1.1,0.2c-0.7,0-1.4,0.1-2.1,0.2 c-2.9,0.3-5.8,0.7-8.6,1.4c-2,0.6-4,1.3-5.8,2.2c-0.9,0.5-1.8,1-2.6,1.7c-0.7,0.6-1.4,1.4-2.2,1.8c-1,0.6-1.8,1.8-2.2,3 c-0.6,1.3-0.8,2.7-0.8,4.1c-0.1,2.1,2.6,5.3,4.9,6.1c4.4,1.5,8.5,0.1,12.7-0.6c3.8-0.6,6.9-2.6,10.1-4.6c2.8-1.8,5.3-3.9,4.6-7.8 c-0.2-1.5,0.5-1.4,1.6-1.2c0.2,0,0.2,0.1,0.4,0.1c4.5,0.7,9,1,13.4,2.2c4.6,1.2,8.9,3,13,5.1c3.5,1.9,6.7,4.4,9.8,6.9 c0.9,0.6,1.8,1.4,2.6,2.1c0.8,0.6,1.8,1.2,2.5,2c0.6,0.7,1.4,1.1,2.1,1.6c0.8,0.6,1.7,1.2,2.5,1.8c0.7,0.6,1.4,1.1,2.1,1.8 c0.3,0.3,0.6,0.6,1,1c1,0.9,2.2,1.4,3.1,2.2c0.3,0.2,0.5,0.6,0.7,0.8c0.5,0.4,0.9,0.8,1.4,1.2c0.9,0.8,1.8,1.5,2.7,2.3 c0.4,0.3,0.7,0.6,1.1,1c0.2,0.2,0.7,0.5,0.7,0.8c0,0.2,0,0.2-0.2,0.2c-0.2,0.1-0.7-0.1-1-0.1c-0.2,0-0.4,0-0.6,0 c-0.6,0.1-1.1,0.1-1.7,0.2c-2.2,0.2-4.4,0.8-6.5,1.4c-0.6,0.2-1.2,0.3-1.5,0.8c-0.4,0.5-0.2,1.3,0.3,1.4c0.2,0.1,0.4,0,0.6,0 c3.8-0.6,7.6,0,11,1.4c1.6,0.6,3.2,1.4,4.6,2.5c0.3,0.2,0.6,0.4,0.9,0.6c0.7,0.4,1.4,0.9,2.1,1.3c0.3,0.2,0.6,0.4,1,0.4 c0.6-0.1,1-0.7,1.3-1.4c0.1-0.3,0.2-0.6,0.2-0.9c-0.1-0.2-0.2-0.5-0.7-0.7c-0.6-0.7-1.4-1.4-1.7-2.2c-0.4-0.9-1-1.6-1.4-2.4 c-0.9-1.7-1.4-3.7-1.6-5.6c-0.4-3,0-5.9,0.6-8.9c0.1-0.2,0.1-0.3,0-0.5c-0.1-0.1-0.2-0.2-0.3-0.2c-0.6-0.3-1.4-0.1-1.9,0.5 c-0.5,0.5-0.7,1.2-0.9,1.9c-0.4,1.4-0.6,3-0.6,4.4c0,0.6,0.2,1,0.2,1.6c-0.8-0.6-1.4-1.4-2.2-2.2c-0.6-0.6-1.2-1-1.8-1.5 c-0.8-0.7-1.7-1.5-2.5-2.2c-0.8-0.7-1.7-1.4-2.4-2.2c-0.9-1-1.9-1.8-2.9-2.6c-1.1-1-2.3-2.1-3.4-3.1c-0.6-0.6-1.2-1.2-1.9-1.6 c-0.7-0.3-1.4-0.7-2-1.3c-1.5-1.4-3.1-2.6-4.7-3.9c-3.2-2.5-6.5-4.9-10.1-6.6c-4-2-8.5-3.1-12.8-4.3c-1.4-0.4-2.7-0.7-4.1-1.1 c-2.6-0.7-5.2-1-7.8-1.3c-0.6,0-1-0.2-1.5-0.2c-1.1,0-2.2,0.2-3.4,0.1c-0.4,0-0.7-0.2-1-0.5c-0.8-0.9-1.4-1.8-2.2-2.7 c-0.2-0.4-0.5-0.8-0.7-1.1c-0.2-0.4-0.8-0.6-1.1-1c-0.6-0.7-1.3-1.4-2-2.2c-1.4-1.4-2.9-2.6-4.5-3.8c-2.2-1.6-4.5-3-6.9-4.2 c-1-0.6-2.2-1.3-3.4-1.4c-0.3-0.1-0.6-0.1-1-0.1c-0.5-0.1-1-0.2-1.4-0.4c-2.2-0.7-4.3-1.4-6.5-2c-4.3-1.2-8.7-2.2-13.2-2.9 c-0.8-0.1-1.5-0.3-2.3-0.2c-0.4,0-0.8,0.1-1.2,0c-1.1-0.2-2.3-0.3-3.4-0.4C28.9,0,26.6,0,24.3,0c-2.1,0.1-4.2,0.3-6.2,0.4 c-0.2,0-0.2,0-0.3,0C16.6,0.5,15.4,0.7,14.4,0.8z M71.3,28.3c0.7-0.1,1.4-0.4,2.2-0.4c2-0.1,4,0.1,5.9,0.4c0.3,0,0.6,0.1,0.7,0.2 c0.2,0.2,0.1,0.5,0,0.7C80,29.5,80,29.8,79.9,30c-0.2,0.6-0.7,1.2-1.2,1.7c-3,3-6.9,4.6-10.8,5.6c-3.7,1-7.6,2.2-11.6,1 c-1.1-0.4-2.5-0.5-2.8-1.8c-0.4-1.4,1-2,1.8-2.7c4-3.4,8.9-4.3,12.9-4.9C69.2,28.6,70.2,28.5,71.3,28.3z"/>
+                        </svg>
+                    </figure>
+                    <!-- Image -->
+                    <div class="position-relative mb-5">
+                        <!-- Image -->
+                        <img src="https://media.discordapp.net/attachments/1101242530168844319/1101573967719972934/26542204-27248663.png?width=905&height=676" class="rounded-3" alt="">
+                        <!-- Manager -->
+                        <div class="position-absolute bottom-0 start-0 ms-n3 ms-lg-n6 mb-2 z-index-1">
+                            <div class="bg-mode shadow d-inline-block text-center rounded-3 position-relative p-4">
+                                <span class="h3 text-primary mb-2">19M+</span>
+                                <h6 class="fw-normal">Passagers en 2022</h6>
+                            </div>
+                        </div>
+                    </div>	
+                    <!-- Features START -->
+                    <div class="row g-4 g-md-5">
+                        <!-- Item -->
+                        <div class="col-sm-6">
+                            <div class="d-flex">
+                                <div class="ms-3">
+                                    <h5 class="mb-2"><i class="fa-solid fa-location-dot me-2"></i> Emplacement et Connectivité</h5>
+                                    <p class="mb-0">L'aéroport de Bruxelles est situé à seulement 12 kilomètres au nord-est du centre-ville de Bruxelles.</p>
+                                </div>
+                            </div>
+                        </div>	
+                        
+                        <!-- Item -->
+                        <div class="col-sm-6">
+                            <div class="d-flex">
+                                <div class="ms-3">
+                                    <h5 class="mb-2"><i class="fa-solid fa-house me-2"></i> Installations Modernes</h5>
+                                    <p class="mb-0"> L'aéroport de Bruxelles propose des installations et des équipements modernes, y compris un large éventail de magasins et de restaurants, ainsi que une variété de services tels que la change et le stockage de bagages.</p>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- Item -->
+                        <div class="col-sm-6">
+                            <div class="d-flex">
+                                <div class="ms-3">
+                                    <h5 class="mb-2"><i class="fa-regular fa-circle-check me-2"></i> Durabilité</h5>
+                                    <p class="mb-0">L'aéroport de Bruxelles est engagé dans la durabilité et a mis en œuvre plusieurs initiatives visant à réduire son impact environnemental, notamment l'utilisation de panneaux solaires, d'éclairage économe en énergie et de programmes de réduction des déchets.</p>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- Item -->
+                        <div class="col-sm-6">
+                            <div class="d-flex">
+                                <div class="ms-3">
+                                    <h5 class="mb-2"><i class="fa-solid fa-shield me-2"></i>Sûreté et Sécurité</h5>
+                                    <p class="mb-0">L'aéroport de Bruxelles accorde une priorité élevée à la sécurité et à la sécurité, avec des mesures strictes pour assurer la sécurité des passagers et du personnel.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Features END -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =======================
+    About END -->
+    
+    <!-- =======================
+    Top City START -->
+    <section class="bg-light">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <!-- Title -->
+                <div class="col-lg-4">
+                    <h2 class="mb-4">Meilleures destinations de Bruxelles</h2>
+                </div>
+    
+                <!-- Listing -->
+                <div  class="col-lg-8">
+                    <div class="row g-4">
+                        <!-- Card item -->
+                        <div class="col-md-6">
+                            <div class="card card-body h-100 p-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <!-- Image and text -->
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://media.discordapp.net/attachments/1101242530168844319/1101581456775589998/Barcelona.png" class="h-70px rounded-2" alt="">
+            
+                                        <div class="ms-3">
+                                            <h5 class="mb-0">Barcelona</h5>
+                                            <span>Spain</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <!-- Card item -->
+                        <div class="col-md-6">
+                            <div class="card card-body h-100 p-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <!-- Image and text -->
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://media.discordapp.net/attachments/1101242530168844319/1101581457631227904/Rome.png" class="h-70px rounded-2" alt="">
+            
+                                        <div class="ms-3">
+                                            <h5 class="mb-0">Rome</h5>
+                                            <span>Italie</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- Card item -->
+                        <div class="col-md-6">
+                            <div class="card card-body h-100 p-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <!-- Image and text -->
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://media.discordapp.net/attachments/1101242530168844319/1101581457383759933/Lisbon.png" class="h-70px rounded-2" alt="">
+            
+                                        <div class="ms-3">
+                                            <h5 class="mb-0">Lisbonne</h5>
+                                            <span>Portugal</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- Card item -->
+                        <div class="col-md-6">
+                            <div class="card card-body h-100 p-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <!-- Image and text -->
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://media.discordapp.net/attachments/970715142616657920/1101254860839596052/New_York.png?width=600&height=600" class="h-70px rounded-2" alt="">
+            
+                                        <div class="ms-3">
+                                            <h5 class="mb-0">New York</h5>
+                                            <span>Etats-unis d'Amérique</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- Card item -->
+                        <div class="col-md-6">
+                            <div class="card card-body h-100 p-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <!-- Image and text -->
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://media.discordapp.net/attachments/970715142616657920/1101254860525027369/Dakar.png?width=600&height=600" class="h-70px rounded-2" alt="">
+            
+                                        <div class="ms-3">
+                                            <h5 class="mb-0">Dakar</h5>
+                                            <span>Sénégal</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- Card item -->
+                        <div class="col-md-6">
+                            <div class="card card-body h-100 p-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <!-- Image and text -->
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://media.discordapp.net/attachments/1101242530168844319/1101581457056612352/Entebbe.png" class="h-70px rounded-2" alt="">
+            
+                                        <div class="ms-3">
+                                            <h5 class="mb-0">Entebbe</h5>
+                                            <span>Uganda</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>	
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =======================
+    Top City END -->
+    
+    </main>
+<!-- **************** MAIN CONTENT END **************** -->
+
+<!-- =======================
+Footer START -->
+<footer class="bg-dark pt-5">
+    <div class="container">
+        <!-- Row START -->
+        <div class="row g-4">
+
+            <!-- Widget 1 START -->
+            <div class="col-lg-3">
+                <!-- logo -->
+                <a href="index.html">
+                    <img class="h-50px" src="https://media.discordapp.net/attachments/970715142616657920/1101240035036110968/snva-white-head.png?width=2072&height=1036" alt="logo">
+                </a>
+                <br>
+                <br>
+				<p style="font-size: 15px;">Une question ou un problème ? Contactez-nous via cet e-mail.</p>
+                <p class="mb-0"><a href="mailto:contact@brusselsvirtual.be" style="font-weight: 500;" class="text-muted text-primary-hover"><i style="font-size: 12px;" class="fa-solid fa-envelope"></i> contact@brusselsvirtual.be</a></p>
+            </div>
+            <!-- Widget 1 END -->
+
+            <!-- Widget 2 START -->
+            <div class="col-lg-8 ms-auto">
+                <div class="row g-4">
+                    <!-- Link block -->
+                    <div class="col-6 col-md-3">
+                        <h5 class="text-white mb-2 mb-md-2">Pages</h5>
+                        <ul class="nav flex-column text-primary-hover">
+                            <li class="nav-item"><a style="font-weight: 700;" class="nav-link text-muted" href="../fr/index.html"><i class="fa-solid fa-circle-info me-2"></i>À propos de nous</a></li>
+                            <li class="nav-item"><a style="font-weight: 700;" class="nav-link text-muted" href="../fr/fleet.html"><i class="fa-solid fa-plane me-2"></i>Notre flotte</a></li>
+                            <li class="nav-item"><a style="font-weight: 700;" class="nav-link text-muted" href="../fr/ranks.html"><i class="fa-solid fa-ranking-star me-2"></i>Nos rangs</a></li>
+                            <li class="nav-item"><a style="font-weight: 700;" class="nav-link text-muted" href="../fr/team.html"><i class="fa-solid fa-people-group me-2"></i>Notre équipe</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Link block -->
+                    <div class="col-6 col-md-3">
+                        <h5 class="text-white mb-2 mb-md-2">IFC</h5>
+                        <ul class="nav flex-column text-primary-hover">
+                            <li class="nav-item"><a  style="font-weight: 700;" class="nav-link text-muted" href="https://community.infiniteflight.com/"><i class="fa-brands fa-discourse me-2"></i>Compte IFC</a></li>
+                            <li class="nav-item"><a  style="font-weight: 700;" class="nav-link text-muted" href="https://community.infiniteflight.com/"><i class="fa-brands fa-discourse me-2"></i>Fil IFC</a></li>
+                            <li class="nav-item"><a  style="font-weight: 700;" class="nav-link text-muted" href="https://ifvarb.com/"><i class="fa-solid fa-plane-up me-2"></i>Site de IFVARB</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Link block -->
+                    <div class="col-6 col-md-3">
+                        <h5 class="text-white mb-2 mb-md-2">Centre d'équipage</h5>
+                        <ul class="nav flex-column text-primary-hover">
+                            <li class="nav-item"><a  style="font-weight: 700;" class="nav-link text-muted" href="https://atlas.va-center.com"><i class="fa-solid fa-circle-user me-2"></i>Connexion</a></li>
+                            <li class="nav-item"><a  style="font-weight: 700;" class="nav-link text-muted" href="https://va-center.com"><i class="fa-solid fa-globe me-2"></i>Site de VACenter</a></li>
+                        </ul>
+                    </div>
+                                    
+                    <!-- Link block -->
+                    <div class="col-6 col-md-3">
+                        <h5 class="text-white mb-2 mb-md-2">Aide</h5>
+                        <ul class="nav flex-column text-primary-hover">
+                            <li class="nav-item"><a  style="font-weight: 700;" class="nav-link text-muted" href="../fr/error.html"><i class="fa-solid fa-computer me-2"></i>Support</a></li>
+                        </ul>
+                    </div>
+
+                    
+                </div>
+            </div>
+            <!-- Widget 2 END -->
+
+        </div><!-- Row END -->
+
+
+        <hr>
+    
+        <!-- Bottom footer -->
+        <div class="row">
+            <div class="container">
+                <div class="d-lg-flex justify-content-between align-items-center py-3 text-center text-lg-start">
+                    <!-- copyright text -->
+                    <div class="text-muted text-primary-hover"> © 2023 Brussels Virtual. Tous les droits sont réservés. <br> Brussels Virtual n'est en aucun cas lié  a Brussels Airlines S.A. / N.V. ou Infinite Flight.
+                    </div>
+                    <!-- copyright links-->
+                    <div class="nav mt-2 mt-lg-0">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- =======================
+Footer END -->
+
+<!-- Back to top -->
+<div class="back-top"></div>
+
+<!-- Bootstrap JS -->
+<script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Vendors -->
+<script src="../assets/vendor/choices/js/choices.min.js"></script>
+<script src="../assets/vendor/flatpickr/js/flatpickr.min.js"></script>
+<script src="../assets/vendor/stepper/js/bs-stepper.min.js"></script>
+<script src="../assets/vendor/quill/js/quill.min.js"></script>
+<script src="../assets/vendor/dropzone/js/dropzone.js"></script>
+
+<!-- ThemeFunctions -->
+<script src="../assets/js/functions.js"></script>
+
+</body>
+</html>
