@@ -10,7 +10,6 @@ function send(event) {
   const lastName = document.getElementById("hireUsFormLasttName").value;
   const username = document.getElementById("hireUsFormUsername").value;
   const email = document.getElementById("hireUsFormWorkEmail").value;
-  const grade = document.getElementById("hireUsFormGrade").value;
   const ifatc = document.getElementById("hireUsFormIFATC").value;
   const details = document.getElementById("hireUsFormDetails").value;
 
@@ -18,25 +17,28 @@ function send(event) {
 
 
   let data;
-async function test() {
-  let  data_json = {
-
-    "discourseNames": [
-      document.getElementById("hireUsFormUsername").value
-    ]
-  }
-const response = await fetch('https://api.infiniteflight.com/public/v2/users?apikey=87sjb5v83oqje4e91t40s4sfd7vspu5m', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(data_json)
-});
-    data = await response.json();
- 
-if(data.result[0].length == 0){
-  console.log("No user found");
-}
+  async function test() {
+    let  data_json = {
+      "discourseNames": [
+        document.getElementById("hireUsFormUsername").value
+      ]
+    };
+    try {
+      const response = await fetch('https://api.infiniteflight.com/public/v2/users?apikey=87sjb5v83oqje4e91t40s4sfd7vspu5m', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data_json)
+      });
+      data = await response.json();
+      if (data.result[0].length == 0) {
+        console.log("No user found");
+      }
+    } catch (error) {
+      console.error("No user found");
+      window.location.href = "./noUser.html";
+    }
 
 
 
@@ -48,16 +50,22 @@ if(data.result[0].length == 0){
 
 let incorrect = false;
   // Validate form data
-  if (!firstName || !lastName || !username || !email || !grade || !ifatc || !details) {
+  if (!firstName || !lastName || !username || !email ||  !ifatc || !details) {
     // Show error message
     document.getElementById("message").innerHTML = "Please fill in all fields.";
     return;
   } 
 
+  if(data.result[0].grade < 3) {
+    incorrect = false
+  } else {
+    incorrect = true
+  }
 
   
   if(incorrect == false) {
     console.log("Grade too low");
+    window.location.href = "./gradeLow.html";
   } else {
     console.log("Grade is correct");
   }
@@ -88,11 +96,6 @@ test()
               inline: true,
             },
             {
-              name: "Grade",
-              value: grade,
-              inline: true,
-            },
-            {
               name: "IFATC",
               value: ifatc,
               inline: true,
@@ -115,7 +118,7 @@ test()
     
     // Redirect to confirmation page after 5 seconds
     setTimeout(() => {
-      // window.location.href = "./success.html";
+       window.location.href = "./success.html";
     }, 2000);
   })
   
