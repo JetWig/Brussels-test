@@ -32,13 +32,14 @@ function send(event) {
         body: JSON.stringify(data_json)
       });
       data = await response.json();
+
       if (data.result[0].length == 0) {
         console.log("No user found");
       }
     } catch (error) {
       console.error("No user found");
       window.location.href = "./noUser.html";
-    }
+    } 
 
 
 
@@ -48,7 +49,8 @@ function send(event) {
 
 
 
-let incorrect = false;
+
+let correct = false;
   // Validate form data
   if (!firstName || !lastName || !username || !email ||  !ifatc || !details) {
     // Show error message
@@ -57,22 +59,16 @@ let incorrect = false;
   } 
 
   if(data.result[0].grade < 3) {
-    incorrect = false
+    correct = false
+    window.location.href = "./gradeLow.html";
   } else {
-    incorrect = true
+    correct = true
   }
 
   
-  if(incorrect == false) {
-    console.log("Grade too low");
-    window.location.href = "./gradeLow.html";
-  } else {
-    console.log("Grade is correct");
-  }
-}
 
-test()
-
+if(correct == true){
+  console.log("Nice job");
   // Send form data to webhook
   fetch("https://discord.com/api/webhooks/1102653530034155691/ILWW-wh-zlhOtdXUzCHiu4ZjzxvTEmOXQ72ms_MdjSM9ZYgYuw2xPMglL5teZrMcfsFE", {
     method: "POST",
@@ -109,7 +105,11 @@ test()
       ],
     }),
   })
-
+} else {
+  console.log("Not nice");
+}
+}
+  test()
   .then(() => {
     // Show success message 
     document.getElementById("message").style.display = "none";
